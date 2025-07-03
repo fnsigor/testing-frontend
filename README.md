@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Laboratório de Testes com Next.js 14
 
-## Getting Started
+Este projeto é um laboratório prático com o objetivo principal de aprofundar e aplicar conceitos de **testes automatizados** em um ambiente de front-end moderno. Além dos testes, o projeto serve como um campo de provas para explorar e integrar tecnologias atuais como **Zod, Zustand e Material UI** no ecossistema Next.js.
 
-First, run the development server:
+O repositório é dividido em três "mini-projetos", cada um em uma página distinta, com níveis de complexidade crescentes. Essa estrutura foi pensada para criar um roteiro de aprendizado prático, partindo de testes de componentes simples e evoluindo para cenários complexos envolvendo estado global e chamadas de API.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 Estrutura dos Mini-Projetos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Página 1: To-Do List (Nível de Complexidade: Fácil)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Uma aplicação clássica de lista de tarefas. O foco aqui é dominar os fundamentos dos testes de componentes com a React Testing Library.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Funcionalidades:**
+    * Adicionar uma nova tarefa.
+    * Marcar uma tarefa como concluída.
+    * Remover uma tarefa da lista.
+* **Tecnologias em Foco:**
+    * React (useState, Callbacks).
+    * Material UI (Componentes de UI como `TextField`, `Button`, `Checkbox`, `List`).
+* **Objetivos de Teste:**
+    * **Testes de Componente:** Garantir que os componentes renderizam corretamente com base nas props.
+    * **Testes de Interação:** Simular ações do usuário (digitar, clicar) com `@testing-library/user-event` para verificar se o estado do componente responde como esperado.
+    * **Testes de Acessibilidade:** Checagens básicas de acessibilidade nos elementos do formulário e da lista.
 
-## Learn More
+### Página 2: Formulário de Cadastro e Tabela (Nível de Complexidade: Médio)
 
-To learn more about Next.js, take a look at the following resources:
+Este projeto simula um cenário de CRUD (Create, Read, Update, Delete) mais realista, com validação de formulário e comunicação com uma API (mockada).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Funcionalidades:**
+    * Um formulário para cadastrar novos usuários (ou produtos).
+    * Validação de dados em tempo real e na submissão.
+    * Uma tabela que exibe os dados cadastrados.
+    * (Opcional) Funcionalidades de editar e deletar na tabela.
+* **Tecnologias em Foco:**
+    * **React Hook Form:** Para gerenciamento eficiente do estado do formulário.
+    * **Zod:** Para declaração de schemas e validação robusta dos dados.
+    * **TanStack Query (React Query):** Para gerenciar o estado do servidor (chamadas de API), incluindo cache, loading, error, e mutações.
+    * **Material UI:** Para componentes de formulário (`<TextField>`, `<Select>`) e a tabela de dados (`<Table>`).
+* **Objetivos de Teste:**
+    * **Testes de Validação:** Garantir que a integração entre React Hook Form e Zod funciona, exibindo mensagens de erro corretas.
+    * **Mocking de API:** Usar `jest.mock` e `mockImplementation` para simular as chamadas de API (hooks `useQuery` e `useMutation

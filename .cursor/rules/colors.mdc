@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+
+Para todo conteúdo visual criado, sempre leve em consideração a seguinte paleta de cores
+
+#858585 - gray/light
+#353535 - gray/medium
+#232323 - gray/dark
+#8437B1 - purple/medium
+#6BBE4E green/medium
+#FFFFFF - white/light 
+
+sempre utilize gray/dark para a cor de fundo das páginas.
+purple/medium sempre  deve ser a cor principal do sistema (por exemplo, cor de botão).
+se precisar usar da cor verde, utilize a cor green/medium.
+Para textos, utilize a cor white/light.
+
+se precisar criar cards ou outros componentes que precisem de cor de fundo, priorize utilizar a cor gray/medium.
+se precisar de bordas para cards, inputs e etc, prioze utilizar a cor gray/light.
+
+
+O projeto utiliza as bibliotecas material ui e tailwind. Se necessário, configure essas 2 bibliotecas para utilizar essa paleta de cores
+
+
+
