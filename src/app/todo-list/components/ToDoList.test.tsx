@@ -96,11 +96,72 @@ describe('/todo-list/testa os componentes de input e lista', () => {
     const listSecondRender = screen.queryAllByTestId('list-item')
     expect(listSecondRender).toHaveLength(2)
 
+  })
 
+  it("item deve estar desmarcado ao ser inserido na lista", async () => {
+    renderWithProvider(
+      <>
+        <InputItem/>
+        <ItemList/>
+      </>
+    );
 
+    const input = screen.getByTestId('input-item')
+    const botao = screen.getByTestId("button-add")
     
+    await userEvent.type(input, "jotaro")
+    await userEvent.click(botao)
+
+    const listItemJotaro = screen.queryAllByTestId('list-item')[0]
+    expect(listItemJotaro).toHaveAttribute('aria-checked', "false")
+
+    const totalTarefas = screen.getByTestId("total-tarefas")
+    expect(totalTarefas).toHaveTextContent("1")
+
+    const totalConcluidas = screen.getByTestId("total-concluidas")
+    expect(totalConcluidas).toHaveTextContent("0")
+
+    await userEvent.type(input, "dio")
+    await userEvent.click(botao)
 
 
+    const totalTarefas2 = screen.getByTestId("total-tarefas")
+    expect(totalTarefas2).toHaveTextContent("2")
+
+
+    const totalConcluidas2 = screen.getByTestId("total-concluidas")
+    expect(totalConcluidas2).toHaveTextContent("0")
     
+    const listItemDio = screen.queryAllByTestId('list-item')[1]
+    expect(listItemDio).toHaveAttribute('aria-checked', "false")
+
+  })
+
+
+  it.only("insira 3 items e marque o 2°", async () => {
+    renderWithProvider(
+      <>
+        <InputItem/>
+        <ItemList/>
+      </>
+    );
+
+    const input = screen.getByTestId('input-item')
+    const botao = screen.getByTestId("button-add")
+    
+    await userEvent.type(input, "jotaro")
+    await userEvent.click(botao)
+    await userEvent.type(input, "dio")
+    await userEvent.click(botao)
+    await userEvent.type(input, "iggy")
+    await userEvent.click(botao)
+
+ 
+    const dioListItem = screen.getAllByTestId('list-item')[1]
+    await userEvent.click(dioListItem)
+    const dioListItemAfterClick = screen.getAllByTestId('list-item')[1]
+
+    expect(dioListItemAfterClick).toHaveAttribute('aria-checked', "true")
+
   })
 });

@@ -1,10 +1,10 @@
 "use client";
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Typography, Paper, Box } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Typography, Paper, Box, Checkbox } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import { useTodoList } from './contex';
 
 export const ItemList = () => {
-  const { items, removeItem } = useTodoList();
+  const { items, removeItem, toggleItem } = useTodoList();
 
   if (items.length === 0) {
     return (
@@ -50,19 +50,22 @@ export const ItemList = () => {
         color: 'white'
       }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          📋 Suas Tarefas ({items.length})
+          📋 Suas Tarefas <span data-testid="total-tarefas">({items.length})</span> - <span data-testid="total-concluidas">{items.filter(item => item.checked).length} concluídas</span>
         </Typography>
       </Box>
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem
+            aria-checked={item.checked}
             data-testid="list-item"
-            key={index}
+            key={item.id}
+            onClick={() => toggleItem(index)}
             sx={{
               borderBottom: index < items.length - 1 ? '1px solid rgba(0, 0, 0, 0.06)' : 'none',
               transition: 'all 0.2s ease',
+              cursor: 'pointer',
               '&:hover': {
-                backgroundColor: 'rgba(102, 126, 234, 0.04)',
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
                 transform: 'translateX(4px)',
               },
               '&:last-child': {
@@ -70,14 +73,35 @@ export const ItemList = () => {
               }
             }}
           >
+            <Checkbox
+              data-testid={`checkbox-${index}`}
+              checked={item.checked}
+              onChange={(e) => {
+                e.stopPropagation(); // Evita que o clique no checkbox dispare o onClick do ListItem
+                toggleItem(index);
+              }}
+              sx={{
+                color: '#667eea',
+                '&.Mui-checked': {
+                  color: '#6BBE4E',
+                },
+                '&:hover': {
+                  backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                }
+              }}
+            />
             <ListItemText
-              primary={item}
+              primary={item.text}
               primaryTypographyProps={{
                 variant: 'body1',
                 sx: { 
                   wordBreak: 'break-word',
                   fontWeight: 500,
-                  color: 'text.primary'
+                  color: 'text.primary',
+                  textDecoration: item.checked ? 'line-through' : 'none',
+                  opacity: item.checked ? 0.6 : 1,
+                  transition: 'all 0.2s ease',
+                  userSelect: 'none' // Evita seleção de texto ao clicar
                 }
               }}
             />
@@ -85,7 +109,8 @@ export const ItemList = () => {
               <IconButton
                 edge="end"
                 aria-label="deletar"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation(); // Evita que o clique no botão dispare o onClick do ListItem
                   removeItem(index);
                 }}
                 sx={{ 

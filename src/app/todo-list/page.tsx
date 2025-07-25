@@ -31,8 +31,8 @@ export default function TodoList() {
           </Typography>
         </Box>
         
-        <InputItem />
-        <ItemList />
+      <InputItem />
+      <ItemList />
       </Container>
     </TodoListProvider>
   );
