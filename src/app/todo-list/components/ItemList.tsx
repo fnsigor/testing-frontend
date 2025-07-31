@@ -1,5 +1,5 @@
 "use client";
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Typography, Paper, Box, Checkbox } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemButton, IconButton, Typography, Paper, Box, Checkbox } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import { useTodoList } from './contex';
 
@@ -70,10 +70,13 @@ export const ItemList = () => {
               },
               '&:last-child': {
                 borderBottom: 'none'
-              }
+              },
+              display: 'flex',
+              justifyContent:'space-between'
             }}
           >
-            <Checkbox
+           <div className='flex items-center grow'>
+           <Checkbox
               data-testid={`checkbox-${index}`}
               checked={item.checked}
               onChange={(e) => {
@@ -92,21 +95,23 @@ export const ItemList = () => {
             />
             <ListItemText
               primary={item.text}
-              primaryTypographyProps={{
-                variant: 'body1',
-                sx: { 
-                  wordBreak: 'break-word',
-                  fontWeight: 500,
-                  color: 'text.primary',
-                  textDecoration: item.checked ? 'line-through' : 'none',
-                  opacity: item.checked ? 0.6 : 1,
-                  transition: 'all 0.2s ease',
-                  userSelect: 'none' // Evita seleção de texto ao clicar
+              slotProps={{
+                primary: {
+                  variant: 'body1',
+                  sx: { 
+                    wordBreak: 'break-word',
+                    fontWeight: 500,
+                    color: 'text.primary',
+                    textDecoration: item.checked ? 'line-through' : 'none',
+                    opacity: item.checked ? 0.6 : 1,
+                    transition: 'all 0.2s ease',
+                    userSelect: 'none', // Evita seleção de texto ao clicar
+                    }
                 }
               }}
             />
-            <ListItemSecondaryAction>
-              <IconButton
+           </div>
+           <IconButton
                 edge="end"
                 aria-label="deletar"
                 onClick={(e) => {
@@ -121,12 +126,11 @@ export const ItemList = () => {
                     transform: 'scale(1.1)',
                     color: '#ff5252'
                   },
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <DeleteIcon />
               </IconButton>
-            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>

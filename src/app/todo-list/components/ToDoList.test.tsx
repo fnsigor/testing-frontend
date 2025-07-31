@@ -9,12 +9,6 @@ import { InputItem } from './InputItem';
 import { ItemList } from './ItemList';
 import { TodoListProvider } from './contex';
 
-//testes pra fazer:
-/*
-1 - adicionar item na lista
-2 - remover item da lista 
-3 - marcar tarefa como concluida
-*/
 
 const renderWithProvider = (component: React.ReactElement) => {
   return render(
