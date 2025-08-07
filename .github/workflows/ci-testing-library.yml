@@ -1,0 +1,29 @@
+name: 'CI - Testing Library'
+run-name: 'CI - Executar Testes Unitários e de Integração'
+
+on: 
+  pull_request: 
+    branches: 
+      [main]
+
+jobs:
+    continuous-delivery-with-testing-Library:
+      runs-on: ubuntu-latest
+      steps:
+
+        - name: use checkout v4
+          uses: actions/checkout@v4
+
+        - name: setup node 20
+          uses: actions/setup-node@v2
+          with:
+            node-version: 20
+
+        - name: install and build
+          run: |
+            npm ci
+            npm run build
+        
+        - name: run tests
+          run: 
+            npm run test
