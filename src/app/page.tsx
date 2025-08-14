@@ -18,7 +18,7 @@ export default function Home() {
             letterSpacing: 1
           }}
         >
-          Batata
+          Laboratório de Testes Automatizados
         </Typography>
         <Typography variant="h5" sx={{ fontWeight: 400, mb: 2 }}>
           Testes unitários e de integração com Jest e Testing Library <br /> Testes e2e com Cypress
