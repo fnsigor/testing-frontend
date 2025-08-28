@@ -1,4 +1,4 @@
-# Laboratório de Testes com Next.js 14
+# Laboratório de Testes com Next.js
 
 Este projeto é um laboratório prático com o objetivo principal de aprofundar e aplicar conceitos de **testes automatizados** em um ambiente de front-end moderno. Além dos testes, o projeto serve como um campo de provas para explorar e integrar tecnologias atuais como **Zod, Zustand e Material UI** no ecossistema Next.js.
 
