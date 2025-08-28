@@ -5,17 +5,13 @@ name: "[CI] Run Tests"
 on:
   push:
     branches:
-      - main
-      - homolog
       - development
   pull_request:
     branches:
       - main
-      - homolog
-      - development
 
 jobs:
-  
+
   unit-and-integration-tests:
     name: Run react testing library tests
     runs-on: ubuntu-latest
