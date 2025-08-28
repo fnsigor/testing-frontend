@@ -1,0 +1,85 @@
+# .github/workflows/ci.yml
+
+name: "[CI] Run Tests"
+
+on:
+  push:
+    branches:
+      - main
+      - homolog
+      - development
+  pull_request:
+    branches:
+      - main
+      - homolog
+      - development
+
+jobs:
+  
+  unit-and-integration-tests:
+    name: Run react testing library tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository v4
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Run Testing Library Tests
+        run: 
+          npm run test
+
+  e2e-tests:
+    name: Run cypress tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository v4
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+      
+      - name: Run E2E Tests
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          wait-on: 'http://localhost:3000'
+          browser: chrome
+  
+      - name: Upload Cypress artifacts
+        uses: actions/upload-artifact@v4
+        # Condição: Executar este passo apenas se o job falhar
+        if: failure()
+        with:
+          name: cypress-artifacts
+          path: cypress/screenshots
+          retention-days: 7 # Guarda os artefatos por 7 dias
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          retention-days: 7
+
+          
+  
