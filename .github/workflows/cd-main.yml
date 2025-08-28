@@ -1,4 +1,4 @@
-name: "[CD] continuous delivery"
+name: "[CD] continuous delivery for production code"
 
 on: 
   push: 
