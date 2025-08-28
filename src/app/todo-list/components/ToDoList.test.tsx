@@ -82,7 +82,7 @@ describe('/todo-list/testa os componentes de input e lista', () => {
     expect(listFisrtRender).toHaveLength(1)
 
 
-    await userEvent.type(input, "feijão")
+    await userEvent.type(input, "feião")
     expect(input).toHaveValue("feijão")
 
     await userEvent.click(botao)
