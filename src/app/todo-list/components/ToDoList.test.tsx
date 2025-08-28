@@ -132,7 +132,7 @@ describe('/todo-list/testa os componentes de input e lista', () => {
   })
 
 
-  it.only("insira 3 items e marque o 2°", async () => {
+  it("insira 3 items e marque o 2°", async () => {
     renderWithProvider(
       <>
         <InputItem/>
