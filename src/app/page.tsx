@@ -18,7 +18,7 @@ export default function Home() {
             letterSpacing: 1
           }}
         >
-          Laboratório de Testes Automatizados
+          Laboratório de Testes
         </Typography>
         <Typography variant="h5" sx={{ fontWeight: 400, mb: 2 }}>
           Testes unitários e de integração com Jest e Testing Library <br /> Testes e2e com Cypress
